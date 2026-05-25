@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Liza 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #e8a0a0;
+    --deep-rose: #c0565e;
+    --blush: #f7ddd9;
+    --gold: #d4a96a;
+    --cream: #fdf6f0;
+    --warm-white: #fffaf7;
+    --dark: #2c1a1a;
+    --mid: #7a4f4f;
+    --light-text: #b07070;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* PETALS CANVAS */
+  #petals-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(160deg, #fdf0ed 0%, #f9e0dc 40%, #fdeee8 100%);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #f5c5be55, transparent 70%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #e8c4a055, transparent 70%);
+  }
+
+  .hero-date {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 15vw, 8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--deep-rose);
+    animation: fadeUp 1s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title span {
+    display: block;
+    font-style: italic;
+    color: var(--dark);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    font-style: italic;
+    color: var(--mid);
+    margin-top: 1.2rem;
+    max-width: 420px;
+    line-height: 1.7;
+    animation: fadeUp 1s 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    animation: fadeUp 1s 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    display: block;
+    width: 60px; height: 1px;
+    background: var(--rose);
+  }
+
+  .hero-divider span {
+    font-size: 1.4rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-text);
+    animation: bounce 2s infinite;
+  }
+
+  /* SECTION BASE */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--deep-rose);
+  }
+
+  /* WHO YOU ARE */
+  .who-section {
+    background: var(--cream);
+    padding: 5rem 1.5rem;
+  }
+
+  .who-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .traits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .trait-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    border: 1px solid #f0d8d2;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .trait-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(192, 86, 94, 0.08);
+  }
+
+  .trait-icon {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.6rem;
+  }
+
+  .trait-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--deep-rose);
+    margin-bottom: 0.3rem;
+  }
+
+  .trait-desc {
+    font-size: 0.78rem;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* PHOTO GALLERY */
+  .gallery-section {
+    background: var(--warm-white);
+    padding: 5rem 1.5rem;
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .gallery-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #f0d8d2;
+  }
+
+  .gallery-item.wide {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+
+  .gallery-item.tall {
+    aspect-ratio: 3/4;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.04);
+  }
+
+  .gallery-item::after {
+    content: attr(data-caption);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(44, 26, 26, 0.65));
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    padding: 1.5rem 0.8rem 0.6rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-item:hover::after {
+    opacity: 1;
+  }
+
+  /* LETTER SECTION */
+  .letter-section {
+    background: linear-gradient(135deg, #f9e5e1 0%, #fdf0ec 100%);
+    padding: 5rem 1.5rem;
+  }
+
+  .letter-inner {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .letter-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 60px rgba(192, 86, 94, 0.08);
+    position: relative;
+  }
+
+  .letter-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.5rem; left: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem;
+    color: var(--blush);
+    line-height: 1;
+  }
+
+  .letter-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+    line-height: 1.9;
+    color: var(--dark);
+    font-weight: 300;
+  }
+
+  .letter-text p { margin-bottom: 1.2rem; }
+  .letter-text p:last-child { margin-bottom: 0; }
+
+  .letter-text strong {
+    font-weight: 600;
+    color: var(--deep-rose);
+  }
+
+  .letter-sign {
+    margin-top: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--light-text);
+    font-size: 1rem;
+    text-align: right;
+  }
+
+  /* CHALANT SECTION */
+  .chalant-section {
+    background: var(--dark);
+    color: white;
+    padding: 5rem 1.5rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .chalant-section .section-label { color: var(--rose); }
+  .chalant-section .section-title { color: white; }
+  .chalant-section .section-title em { color: var(--rose); }
+
+  .notification-demo {
+    margin: 2.5rem auto 0;
+    max-width: 340px;
+  }
+
+  .phone-mockup {
+    background: #1a1a1a;
+    border-radius: 30px;
+    padding: 1.5rem 1.2rem;
+    border: 2px solid #333;
+    position: relative;
+  }
+
+  .notif-bar {
+    background: #2a2a2a;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    animation: notifPop 0.5s ease;
+  }
+
+  .notif-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .notif-content { text-align: left; }
+  .notif-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #eee;
+  }
+  .notif-msg {
+    font-size: 0.72rem;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  .smile-text {
+    margin-top: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rose);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  /* VIDEO SECTION */
+  .video-section {
+    background: var(--cream);
+    padding: 5rem 1.5rem;
+  }
+
+  .video-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .video-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+  }
+
+  .video-wrap {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    background: #1a1a1a;
+  }
+
+  .video-wrap iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: none;
+    display: block;
+  }
+
+  .video-label {
+    padding: 0.8rem 1rem;
+    background: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--mid);
+    border-top: 1px solid #f0d8d2;
+  }
+
+  /* WISHES SECTION */
+  .wishes-section {
+    background: white;
+    padding: 5rem 1.5rem;
+    text-align: center;
+  }
+
+  .wishes-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .wish-list {
+    list-style: none;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .wish-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 1.2rem 1.2rem;
+    text-align: left;
+  }
+
+  .wish-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--rose);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 28px;
+  }
+
+  .wish-text {
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.7;
+    font-weight: 300;
+    padding-top: 0.2rem;
+  }
+
+  /* FOOTER */
+  .footer-section {
+    background: linear-gradient(160deg, #fdf0ed 0%, #f7e0dc 100%);
+    padding: 5rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 14vw, 7rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep-rose);
+    opacity: 0.12;
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .footer-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 8vw, 4rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 1rem;
+  }
+
+  .footer-big em { font-style: italic; color: var(--deep-rose); }
+
+  .footer-small {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .hearts-row {
+    font-size: 1.5rem;
+    margin: 1.5rem 0;
+    letter-spacing: 0.3rem;
+    animation: pulse-hearts 2s infinite;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes notifPop {
+    from { opacity: 0; transform: translateY(-12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse-hearts {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  /* REVEAL ON SCROLL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* MOBILE TWEAKS */
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+    .gallery-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
+    .traits-grid { grid-template-columns: 1fr; }
+    .letter-card { padding: 2rem 1.3rem; }
+  }
+
+  @media (min-width: 640px) {
+    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-item.wide { grid-column: span 3; }
+    .video-grid { grid-template-columns: repeat(2, 1fr); }
+    .traits-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petals-canvas"></canvas>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-date">June 18th &nbsp;·&nbsp; A Day to Remember</p>
+  <h1 class="hero-title">
+    Happy
+    <span>Birthday,</span>
+    Liza.
+  </h1>
+  <p class="hero-sub">
+    To the girl who makes the world brighter just by existing in it —
+    today belongs entirely to you.
+  </p>
+  <div class="hero-divider"><span>🌸</span></div>
+  <p style="font-size:0.82rem;color:var(--light-text);font-weight:300;max-width:300px;line-height:1.7;">
+    A quiet force. A beautiful soul. A person worth every unspoken word.
+  </p>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<!-- WHO YOU ARE -->
+<section class="who-section">
+  <div class="who-inner reveal">
+    <p class="section-label">she is</p>
+    <h2 class="section-title">Everything she doesn't<br><em>even try</em> to be</h2>
+    <p style="font-size:0.9rem;color:var(--mid);line-height:1.8;font-weight:300;">
+      She doesn't do anything extra — and yet, somehow, she does everything right.
+      Some people don't need noise to make an impression. Liza is one of those rare few.
+    </p>
+    <div class="traits-grid">
+      <div class="trait-card">
+        <span class="trait-icon">🏃‍♀️</span>
+        <div class="trait-title">Athlete</div>
+        <div class="trait-desc">She runs toward her goals with the same dedication she puts into every part of life.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon">🔥</span>
+        <div class="trait-title">Dedicated</div>
+        <div class="trait-desc">When she commits to something, she doesn't half-do it. That kind of discipline is rare.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon">💪</span>
+        <div class="trait-title">Hardworking</div>
+        <div class="trait-desc">She earns every step forward. Nothing handed, everything built — and it shows.</div>
+      </div>
+      <div class="trait-card">
+        <span class="trait-icon">🌿</span>
+        <div class="trait-title">Healing</div>
+        <div class="trait-desc">She's quietly fighting for her own happiness, and that kind of bravery deserves the world.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-header reveal">
+    <p class="section-label">her world</p>
+    <h2 class="section-title">Strength, grace &<br><em>quiet fire</em></h2>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item wide" data-caption="Running toward something beautiful">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.51.26 (4).jpeg"Athlete running at sunrise" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Grace in every movement">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30 (1).jpeg"Female athlete training" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Dedicated and unstoppable">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30 (2).jpeg" alt="Athletic dedication" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Her silence speaks volumes">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30 (3).jpeg" alt="Beautiful portrait" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Golden mornings she runs through">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30 (4).jpeg" alt="Morning run golden hour" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Strong in ways words can't capture">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30 (5).jpeg" alt="Strong woman athlete" loading="lazy">
+    </div>
+    <div class="gallery-item wide" data-caption="Born to outrun every doubt">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.30.jpeg" alt="Track athlete" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Flowers for a girl who is one">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.29.jpeg" alt="Beautiful flowers" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Healing is its own kind of strength">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.32 (1).jpeg" alt="Peaceful sunrise" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Every step forward matters">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.31.32.jpeg" alt="Athletic training focus" loading="lazy">
+    </div>
+    <div class="gallery-item wide" data-caption="A soul that glows from within">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.47.30.jpeg" alt="Radiant portrait" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Strength wears many faces">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.51.26 (2).jpeg" alt="Strength portrait" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Dreams written in her eyes">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.51.26.jpeg" alt="Eyes full of dreams" loading="lazy">
+    </div>
+    <div class="gallery-item" data-caption="Beauty in the stillness">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.51.26 (1).jpeg" alt="Peaceful stillness" loading="lazy">
+    </div>
+    <div class="gallery-item wide" data-caption="Living like every moment matters">
+      <img src="Images/WhatsApp Image 2026-05-24 at 10.51.26 (3).jpeg" alt="Moment of grace" loading="lazy">
+    </div>
+    
+  </div>
+</section>
+
+<!-- THE LETTER -->
+<section class="letter-section">
+  <div class="letter-inner reveal">
+    <p class="section-label" style="text-align:center;">from the heart</p>
+    <h2 class="section-title" style="text-align:center;">Things I didn't<br>plan to <em>feel</em></h2>
+    <div class="letter-card">
+      <div class="letter-text">
+        <p>
+          Dear Liza, I want you to know that I'm the kind of person who doesn't easily get
+          moved. I stay cool. I stay unbothered. I am, by nature, nonchalant —
+          <strong>but you make me chalant.</strong>
+        </p>
+        <p>
+          You barely talk to me, and somehow that's the part I think about most.
+          You don't do anything extra — no grand gestures, no performances —
+          and yet <strong>I find myself imagining life with you by my side</strong>,
+          which is not a thought I'm used to having.
+        </p>
+        <p>
+          Your notifications make me smile like a fool. Your dedication to your craft
+          makes me want to be better. Your beauty — not just the kind you see,
+          but the kind that lives in your discipline and your quiet strength — 
+          <strong>it stays with me</strong> long after you've stopped talking.
+        </p>
+        <p>
+          You are trying to be happy. You are trying to heal.
+          And I think that is the most beautiful thing a person can do —
+          choosing themselves, quietly, consistently, every single day.
+          <strong>I see you doing that. And I think you're winning.</strong>
+        </p>
+        <p>
+          On your birthday, I just want you to know:
+          you make someone very happy by simply existing.
+          The world is genuinely better with you in it.
+        </p>
+      </div>
+      <div class="letter-sign">— Someone who can't seem to stop thinking about you 🌸</div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALANT SECTION -->
+<section class="chalant-section">
+  <div class="reveal" style="max-width:520px;margin:0 auto;">
+    <p class="section-label">a confession</p>
+    <h2 class="section-title">
+      Normally I'm nonchalant.<br>
+      With you? I'm very <em>chalant.</em>
+    </h2>
+    <p style="font-size:0.88rem;color:#aaa;font-weight:300;line-height:1.8;margin-top:1rem;">
+      There's something dangerously unfair about the way you operate.
+      You do the absolute bare minimum and somehow hold maximum space in my head.
+      I didn't sign up for this. I blame you entirely. And I'm fine with it.
+    </p>
+
+    <div class="notification-demo" style="margin-top:2.5rem;">
+      <div class="phone-mockup">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+          <span style="font-size:0.7rem;color:#666;letter-spacing:0.05em;">9:41 AM</span>
+          <span style="font-size:0.7rem;color:#666;">🔋 ████</span>
+        </div>
+        <div class="notif-bar" id="notif-bar">
+          <div class="notif-avatar">💬</div>
+          <div class="notif-content">
+            <div class="notif-name">Liza</div>
+            <div class="notif-msg">Hey 👋</div>
+          </div>
+        </div>
+        <div class="smile-text" id="smile-reaction" style="display:none;">
+          *proceeds to read it 6 times, smile sheepishly, and act unbothered* 😶‍🌫️😊
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGES SECTION -->
+<section class="who-section">
+  <div class="who-inner reveal">
+    <p class="section-label">unspoken thoughts</p>
+    <h2 class="section-title">Things my heart<br>keeps <em>saying</em></h2>
+    
+    <div class="letter-card" style="margin-top: 2rem; text-align: left;">
+      <div class="letter-text">
+        <p>
+          You are an athlete in every sense of the word — <strong>dedicated, disciplined, and driven.</strong>
+          You push your body and mind to places most people are afraid to go. But what amazes me most
+          is that you do it all while carrying a heart that is still learning how to mend.
+        </p>
+        <p>
+          That duality — <strong>strength and softness</strong> — is breathtaking. You are not just building endurance;
+          you are building resilience. And I admire that more than words could ever express.
+          Your dedication is not just to your sport, but to becoming the best version of you.
+        </p>
+      </div>
+    </div>
+
+    <div class="letter-card" style="margin-top: 1.5rem; text-align: left;">
+      <div class="letter-text">
+        <p>
+          She barely talks to me but anytime I see her notification, <strong>I smile sheepishly.</strong>
+          My heart does this ridiculous little dance that I have no control over.
+          It is involuntary. It is inevitable. <strong>It is love, probably.</strong>
+        </p>
+        <p>
+          You are my favorite notification. My favorite distraction. My favorite thought.
+          You have this power over me without even trying, and honestly? <strong>I love it.</strong>
+          I love how you make me feel like a teenager with a crush — nervous and hopeful all at once.
+        </p>
+      </div>
+    </div>
+
+    <div class="letter-card" style="margin-top: 1.5rem; text-align: center;">
+      <div class="letter-text">
+        <p style="font-style: italic; color: var(--deep-rose); font-weight: 500;">
+          "Healing looks beautiful on you. You deserve rest. You deserve joy.
+          You deserve someone who sees your worth without you having to explain it.
+          On this birthday, I hope you feel how deeply you matter — not for what you do,
+          but for who you are."
+        </p>
+      </div>
+      <div class="letter-sign" style="text-align: center; margin-top: 1.5rem;">— For Liza, Today & Always 🌸</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<!-- <section class="video-section">
+  <div class="video-header reveal">
+    <p class="section-label">for you</p>
+    <h2 class="section-title">Sounds & scenes<br>to <em>celebrate you</em></h2>
+  </div>
+  <div class="video-grid reveal">
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/CevxZvSJLk8" title="Happy Birthday Song" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🎂 Happy Birthday — A gift just for you</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/ZXsQAXx_ao0" title="Motivational Athlete Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🏃‍♀️ For the athlete who never quits</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/pqjK5MnQAKs" title="Beautiful Healing Journey" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🌿 On healing and becoming whole</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/XqZsoesa55w" title="Beautiful Piano Birthday" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🎹 A melody as beautiful as you</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/09R8_2nJtjg" title="Inspirational Woman Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">✨ For every strong woman finding her way</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/Y66j_BUCBMY" title="Best Day of Your Life" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🌸 Today is your day, Liza</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/W9gY0ZZr1gw" title="Beautiful Celebration" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🎉 Celebrating you and all you are</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Inspiring Journey" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">💫 Your journey is inspiring</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="Grace and Elegance" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">✨ Grace in every moment</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/OPf0YbXqDm0" title="Dreams Come True" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">🌟 Your dreams deserve to soar</div>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/9jK-NcRmVcw" title="Find Your Passion" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="video-label">❤️ Living your passion, your way</div>
+    </div>
+  </div>
+</section> -->
+
+<!-- WISHES -->
+<section class="wishes-section">
+  <div class="wishes-inner reveal">
+    <p class="section-label">18th June</p>
+    <h2 class="section-title">Birthday <em>wishes</em><br>from me to you</h2>
+    <ul class="wish-list">
+      <li class="wish-item">
+        <span class="wish-num">01</span>
+        <span class="wish-text">May every finish line you cross this year feel like a celebration — because you earned every single step that brought you there.</span>
+      </li>
+      <li class="wish-item">
+        <span class="wish-num">02</span>
+        <span class="wish-text">May the healing you're working on quietly become the peace you deserve loudly. You are allowed to feel whole again.</span>
+      </li>
+      <li class="wish-item">
+        <span class="wish-num">03</span>
+        <span class="wish-text">May the happiness you're chasing find its way to your door before you even stop running toward it.</span>
+      </li>
+      <li class="wish-item">
+        <span class="wish-num">04</span>
+        <span class="wish-text">May you never underestimate how many people's days you make better just by showing up and being exactly who you are.</span>
+      </li>
+      <li class="wish-item">
+        <span class="wish-num">05</span>
+        <span class="wish-text">May your dedication keep paying off in ways that surprise even you — because great things happen to great people who keep showing up.</span>
+      </li>
+      <li class="wish-item">
+        <span class="wish-num">06</span>
+        <span class="wish-text">And may someone whose heart you've stolen — entirely without trying — always be here quietly rooting for you. 🌸</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="footer-section">
+  <div class="reveal" style="position:relative;z-index:1;">
+    <p class="section-label">always</p>
+    <h2 class="footer-big">
+      Happy Birthday,<br><em>Beautiful Liza.</em>
+    </h2>
+    <div class="hearts-row">🌸 💖 🌸 💖 🌸</div>
+    <p class="footer-small">June 18th &nbsp;·&nbsp; A day the world got luckier</p>
+    <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--light-text);font-weight:300;max-width:340px;margin-left:auto;margin-right:auto;line-height:1.8;">
+      "She's minimal in words, maximum in effect.<br>
+      She doesn't try hard. She just is.<br>
+      And that, somehow, is everything."
+    </p>
+  </div>
+  <div class="footer-name">Liza</div>
+</section>
+
+<script>
+// ── PETAL CANVAS ──
+const canvas = document.getElementById('petals-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, petals = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function Petal() {
+  this.x = Math.random() * W;
+  this.y = Math.random() * H - H;
+  this.size = Math.random() * 8 + 4;
+  this.speedY = Math.random() * 1.5 + 0.5;
+  this.speedX = Math.random() * 1 - 0.5;
+  this.rotation = Math.random() * 360;
+  this.rotSpeed = Math.random() * 2 - 1;
+  this.opacity = Math.random() * 0.4 + 0.15;
+  this.color = ['#f5b8b5','#e8a0a0','#f7c5c0','#f0d0cc','#d4a96a'][Math.floor(Math.random()*5)];
+}
+
+Petal.prototype.update = function() {
+  this.y += this.speedY;
+  this.x += this.speedX + Math.sin(this.y * 0.02) * 0.3;
+  this.rotation += this.rotSpeed;
+  if (this.y > H + 10) {
+    this.y = -10;
+    this.x = Math.random() * W;
+  }
+};
+
+Petal.prototype.draw = function() {
+  ctx.save();
+  ctx.translate(this.x, this.y);
+  ctx.rotate(this.rotation * Math.PI / 180);
+  ctx.globalAlpha = this.opacity;
+  ctx.fillStyle = this.color;
+  ctx.beginPath();
+  ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+};
+
+function initPetals() {
+  petals = [];
+  for (let i = 0; i < 45; i++) {
+    const p = new Petal();
+    p.y = Math.random() * H;
+    petals.push(p);
+  }
+}
+
+function animatePetals() {
+  ctx.clearRect(0, 0, W, H);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animatePetals);
+}
+
+resize();
+initPetals();
+animatePetals();
+window.addEventListener('resize', () => { resize(); initPetals(); });
+
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+// ── NOTIFICATION DEMO ──
+const notifBar = document.getElementById('notif-bar');
+const smileReaction = document.getElementById('smile-reaction');
+
+const messages = ['Hey 👋', 'Good morning ☀️', 'Thinking of you 🌸', 'Hi 😊', 'Hey you 💬'];
+let msgIdx = 0;
+
+function cycleNotif() {
+  msgIdx = (msgIdx + 1) % messages.length;
+  notifBar.style.animation = 'none';
+  notifBar.offsetHeight;
+  notifBar.style.animation = 'notifPop 0.4s ease';
+  notifBar.querySelector('.notif-msg').textContent = messages[msgIdx];
+  smileReaction.style.display = 'block';
+  setTimeout(() => {
+    smileReaction.style.display = 'none';
+    setTimeout(cycleNotif, 2000);
+  }, 2500);
+}
+
+setTimeout(cycleNotif, 3000);
+</script>
+</body>
+</html>
